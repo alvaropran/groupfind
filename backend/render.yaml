@@ -1,0 +1,53 @@
+services:
+  - type: web
+    name: groupfind-api
+    runtime: python
+    buildCommand: pip install -e .
+    startCommand: uvicorn src.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROUPFIND_DATABASE_URL
+        fromDatabase:
+          name: groupfind-db
+          property: connectionString
+      - key: GROUPFIND_REDIS_URL
+        fromService:
+          name: groupfind-redis
+          type: redis
+          property: connectionString
+      - key: GROUPFIND_LLM_PROVIDER
+        value: groq
+      - key: GROUPFIND_GROQ_API_KEY
+        sync: false
+      - key: GROUPFIND_REDDIT_CLIENT_ID
+        sync: false
+      - key: GROUPFIND_REDDIT_CLIENT_SECRET
+        sync: false
+      - key: GROUPFIND_CORS_ORIGINS
+        value: '["https://groupfind.vercel.app"]'
+
+  - type: worker
+    name: groupfind-worker
+    runtime: python
+    buildCommand: pip install -e .
+    startCommand: celery -A src.celery_app worker --loglevel=info
+    envVars:
+      - key: GROUPFIND_DATABASE_URL
+        fromDatabase:
+          name: groupfind-db
+          property: connectionString
+      - key: GROUPFIND_REDIS_URL
+        fromService:
+          name: groupfind-redis
+          type: redis
+          property: connectionString
+      - key: GROUPFIND_LLM_PROVIDER
+        value: groq
+      - key: GROUPFIND_GROQ_API_KEY
+        sync: false
+
+databases:
+  - name: groupfind-db
+    plan: free
+
+  - name: groupfind-redis
+    plan: free
