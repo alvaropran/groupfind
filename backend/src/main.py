@@ -3,13 +3,12 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from src.api.router import api_router
 from src.config import settings
-from src.middleware.rate_limiter import RateLimiterMiddleware
 
 
 def create_app() -> FastAPI:
     app = FastAPI(
         title="GroupFind API",
-        description="Instagram group chat event extraction backend",
+        description="Instagram group chat activity planner backend",
         version="0.1.0",
     )
 
@@ -20,8 +19,6 @@ def create_app() -> FastAPI:
         allow_methods=["GET", "POST"],
         allow_headers=["Content-Type"],
     )
-
-    app.add_middleware(RateLimiterMiddleware)
 
     app.include_router(api_router, prefix="/api")
 
