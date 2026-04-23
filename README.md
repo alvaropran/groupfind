@@ -4,6 +4,9 @@
 
 🔗 Live: [groupfind.vercel.app](https://groupfind.vercel.app)
 
+<img width="898" height="868" alt="Screenshot 2026-04-23 at 12 42 21 PM" src="https://github.com/user-attachments/assets/fedddc2c-6453-4caf-8ae1-239e4e1c924f" />
+
+
 ---
 
 ## Why I built this
