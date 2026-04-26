@@ -1,6 +1,6 @@
 # GroupFind
 
-**Turn your Instagram group chat into a trip plan — activities extracted, deduped, and ready to book.**
+**Turn your Instagram group chat into a trip plan. Activities extracted, deduped, and ready to book.**
 
 🔗 Live: [groupfind.vercel.app](https://groupfind.vercel.app)
 
